@@ -1,2 +1,3 @@
-# Employee_Attrition_Prediction
- Predicting employee attrition using logistic regression, decision trees, or random forests.
+# Employee Attrition Prediction with Machine Learning in R
+
+Welcome to the Employee Attrition Prediction repository! Here, we employ various machine learning techniques including logistic regression, decision trees, and random forests in R to predict employee attrition. Leveraging the IBM HR Analytics Employee Attrition dataset sourced from Kaggle, this project aims to offer insights into understanding and mitigating employee turnover. Whether you're an HR professional, data enthusiast, or a machine learning practitioner, this repository provides practical examples and solutions for tackling the challenge of employee attrition prediction.
