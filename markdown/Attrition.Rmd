@@ -558,5 +558,39 @@ print(single_level_factors)
 attrition_data <- attrition_data[, !names(attrition_data) %in% single_level_factors]
 ```
 
+```{r Data Splitting}
+# Load required package for data splitting
+library(caTools)
 
+# Set seed for reproducibility
+set.seed(123)
+
+# Split the data into training and testing sets (80% training, 20% testing)
+split <- sample.split(attrition_data$Attrition, SplitRatio = 0.8)
+
+# Create training and testing datasets
+training_data <- attrition_data[split, ]
+testing_data <- attrition_data[!split, ]
+
+# Display the dimensions of the training and testing datasets
+cat("Training dataset dimensions:", dim(training_data), "\n")
+cat("Testing dataset dimensions:", dim(testing_data), "\n")
+```
+
+```{r}
+# Load required package for bootstrapping
+library(boot)
+
+# Function to compute the statistic of interest (e.g., mean, median) from a bootstrap sample
+compute_statistic <- function(data, indices) {
+  statistic <- mean(data$Age[indices])  # Example: Compute the mean of 'Age'
+  return(statistic)
+}
+
+# Perform bootstrapping
+boot_results <- boot(data = attrition_data, statistic = compute_statistic, R = 1000)
+
+# Display the bootstrapped results
+print(boot_results)
+```
 

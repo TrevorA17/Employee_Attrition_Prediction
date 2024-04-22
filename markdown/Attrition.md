@@ -1468,3 +1468,67 @@ print(single_level_factors)
 # If you want to remove these variables from the modeling process:
 attrition_data <- attrition_data[, !names(attrition_data) %in% single_level_factors]
 ```
+
+``` r
+# Load required package for data splitting
+library(caTools)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Split the data into training and testing sets (80% training, 20% testing)
+split <- sample.split(attrition_data$Attrition, SplitRatio = 0.8)
+
+# Create training and testing datasets
+training_data <- attrition_data[split, ]
+testing_data <- attrition_data[!split, ]
+
+# Display the dimensions of the training and testing datasets
+cat("Training dataset dimensions:", dim(training_data), "\n")
+```
+
+    ## Training dataset dimensions: 1176 34
+
+``` r
+cat("Testing dataset dimensions:", dim(testing_data), "\n")
+```
+
+    ## Testing dataset dimensions: 294 34
+
+``` r
+# Load required package for bootstrapping
+library(boot)
+```
+
+    ## 
+    ## Attaching package: 'boot'
+
+    ## The following object is masked from 'package:lattice':
+    ## 
+    ##     melanoma
+
+``` r
+# Function to compute the statistic of interest (e.g., mean, median) from a bootstrap sample
+compute_statistic <- function(data, indices) {
+  statistic <- mean(data$Age[indices])  # Example: Compute the mean of 'Age'
+  return(statistic)
+}
+
+# Perform bootstrapping
+boot_results <- boot(data = attrition_data, statistic = compute_statistic, R = 1000)
+
+# Display the bootstrapped results
+print(boot_results)
+```
+
+    ## 
+    ## ORDINARY NONPARAMETRIC BOOTSTRAP
+    ## 
+    ## 
+    ## Call:
+    ## boot(data = attrition_data, statistic = compute_statistic, R = 1000)
+    ## 
+    ## 
+    ## Bootstrap Statistics :
+    ##     original      bias    std. error
+    ## t1* 36.92381 -0.01553401   0.2299266
