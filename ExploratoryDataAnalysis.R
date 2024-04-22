@@ -308,3 +308,44 @@ summary(attrition_data$YearsWithCurrManager)
 # Quartiles for YearsWithCurrManager
 quantile(attrition_data$YearsWithCurrManager)
 
+# Measures of Relationship
+# Correlation matrix for numeric variables
+correlation_matrix <- cor(attrition_data[c("Age", "DailyRate", "DistanceFromHome", "MonthlyIncome", "MonthlyRate", "NumCompaniesWorked", "PercentSalaryHike", "TotalWorkingYears", "TrainingTimesLastYear", "YearsAtCompany", "YearsInCurrentRole", "YearsSinceLastPromotion", "YearsWithCurrManager")])
+print(correlation_matrix)
+
+# Contingency table for Attrition and BusinessTravel
+table(attrition_data$Attrition, attrition_data$BusinessTravel)
+
+# Contingency table for Attrition and Department
+table(attrition_data$Attrition, attrition_data$Department)
+
+# Contingency table for Attrition and EducationField
+table(attrition_data$Attrition, attrition_data$EducationField)
+
+# Contingency table for Attrition and Gender
+table(attrition_data$Attrition, attrition_data$Gender)
+
+# Contingency table for Attrition and JobRole
+table(attrition_data$Attrition, attrition_data$JobRole)
+
+# Contingency table for Attrition and MaritalStatus
+table(attrition_data$Attrition, attrition_data$MaritalStatus)
+
+# Contingency table for Attrition and Over18
+table(attrition_data$Attrition, attrition_data$Over18)
+
+# Contingency table for Attrition and OverTime
+table(attrition_data$Attrition, attrition_data$OverTime)
+
+# Contingency table for Attrition and PerformanceRating
+table(attrition_data$Attrition, attrition_data$PerformanceRating)
+
+# Contingency table for Attrition and RelationshipSatisfaction
+table(attrition_data$Attrition, attrition_data$RelationshipSatisfaction)
+
+# Contingency table for Attrition and StockOptionLevel
+table(attrition_data$Attrition, attrition_data$StockOptionLevel)
+
+# Contingency table for Attrition and WorkLifeBalance
+table(attrition_data$Attrition, attrition_data$WorkLifeBalance)
+
