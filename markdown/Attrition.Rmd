@@ -577,7 +577,7 @@ cat("Training dataset dimensions:", dim(training_data), "\n")
 cat("Testing dataset dimensions:", dim(testing_data), "\n")
 ```
 
-```{r}
+```{r Boostrapping}
 # Load required package for bootstrapping
 library(boot)
 
@@ -622,5 +622,31 @@ model <- train(Attrition ~ ., data = subset_data, method = "rf", trControl = ctr
 
 # Display the model results
 print(model)
+```
+
+```{r Model Training}
+# Make predictions using the logistic regression model
+logistic_predictions <- predict(logistic_model, type = "response")
+
+# Convert predicted probabilities to binary predictions
+logistic_predictions_binary <- ifelse(logistic_predictions > 0.5, "Yes", "No")
+
+# Calculate accuracy
+logistic_accuracy <- mean(logistic_predictions_binary == subset_data$Attrition)
+print(paste("Logistic Regression Accuracy:", logistic_accuracy))
+
+# Make predictions using the decision tree model
+tree_predictions <- predict(tree_model, subset_data, type = "class")
+
+# Calculate accuracy
+tree_accuracy <- mean(tree_predictions == subset_data$Attrition)
+print(paste("Decision Tree Accuracy:", tree_accuracy))
+
+# Make predictions using the random forest model
+rf_predictions <- predict(rf_model, subset_data)
+
+# Calculate accuracy
+rf_accuracy <- mean(rf_predictions == subset_data$Attrition)
+print(paste("Random Forest Accuracy:", rf_accuracy))
 ```
 

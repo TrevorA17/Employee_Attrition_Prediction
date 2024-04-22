@@ -1532,3 +1532,56 @@ print(boot_results)
     ## Bootstrap Statistics :
     ##     original      bias    std. error
     ## t1* 36.92381 -0.01553401   0.2299266
+
+``` r
+#Cross-Validation
+# Load required package for cross-validation
+library(caret)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Specify the size of the subset (e.g., 80% of the original data)
+subset_size <- 0.8 * nrow(attrition_data)
+
+# Randomly select rows for the subset
+subset_indices <- sample(1:nrow(attrition_data), subset_size, replace = FALSE)
+
+# Create the subset
+subset_data <- attrition_data[subset_indices, ]
+
+# Display the dimensions of the subset
+cat("Subset dataset dimensions:", dim(subset_data), "\n")
+```
+
+    ## Subset dataset dimensions: 1176 34
+
+``` r
+# Define the control parameters for cross-validation
+ctrl <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
+
+# Train the model using cross-validation on the subset dataset
+model <- train(Attrition ~ ., data = subset_data, method = "rf", trControl = ctrl)
+
+# Display the model results
+print(model)
+```
+
+    ## Random Forest 
+    ## 
+    ## 1176 samples
+    ##   33 predictor
+    ##    2 classes: 'No', 'Yes' 
+    ## 
+    ## No pre-processing
+    ## Resampling: Cross-Validated (10 fold) 
+    ## Summary of sample sizes: 1059, 1059, 1058, 1058, 1059, 1058, ... 
+    ## Resampling results across tuning parameters:
+    ## 
+    ##   mtry  Accuracy   Kappa     
+    ##    2    0.8410039  0.02334149
+    ##   33    0.8512024  0.21196228
+    ##   65    0.8503549  0.23361435
+    ## 
+    ## Accuracy was used to select the optimal model using the largest value.
+    ## The final value used for the model was mtry = 33.
