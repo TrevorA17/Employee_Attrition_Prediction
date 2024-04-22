@@ -45,3 +45,34 @@ head(attrition_data)
 
 # Open the dataset in a viewer window
 View(attrition_data)
+
+# Check for missing values in the dataset
+missing_values <- colSums(is.na(attrition_data))
+
+# Check if there are any missing values in any column
+any_missing <- any(missing_values > 0)
+
+# Print the results
+if (any_missing) {
+  print("There are missing values in the dataset.")
+  # Display the number of missing values in each column
+  print(missing_values[missing_values > 0])
+} else {
+  print("There are no missing values in the dataset.")
+}
+
+# Load required package for data transformation
+library(caret)
+
+# Function to normalize numeric variables
+normalize_data <- function(data) {
+  normalized_data <- as.data.frame(apply(data, 2, function(x) (x - min(x)) / (max(x) - min(x))))
+  return(normalized_data)
+}
+
+# Apply normalization to numeric variables
+normalized_attrition_data <- normalize_data(attrition_data[, c("Age", "DailyRate", "DistanceFromHome", "MonthlyIncome", "MonthlyRate", "NumCompaniesWorked", "PercentSalaryHike", "TotalWorkingYears", "TrainingTimesLastYear", "YearsAtCompany", "YearsInCurrentRole", "YearsSinceLastPromotion", "YearsWithCurrManager")])
+
+# Display the first few rows of the normalized dataset
+head(normalized_attrition_data)
+
