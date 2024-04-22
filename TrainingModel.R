@@ -78,3 +78,16 @@ boot_results <- boot(data = attrition_data, statistic = compute_statistic, R = 1
 # Display the bootstrapped results
 print(boot_results)
 
+#Cross-Validation
+# Load required package for cross-validation
+library(caret)
+
+# Define the control parameters for cross-validation
+ctrl <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
+
+# Train the model using cross-validation
+model <- train(Attrition ~ ., data = attrition_data, method = "rf", trControl = ctrl)
+
+# Display the model results
+print(model)
+

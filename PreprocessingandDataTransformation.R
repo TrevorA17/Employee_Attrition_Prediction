@@ -76,3 +76,23 @@ normalized_attrition_data <- normalize_data(attrition_data[, c("Age", "DailyRate
 # Display the first few rows of the normalized dataset
 head(normalized_attrition_data)
 
+# Check the number of levels for each factor variable
+factor_levels <- sapply(attrition_data, function(x) {
+  if (is.factor(x)) {
+    return(length(levels(x)))
+  } else {
+    return(0)  # For non-factor variables
+  }
+})
+
+# Identify factor variables with only one level
+single_level_factors <- names(factor_levels[factor_levels == 1])
+
+# Print the names of factor variables with only one level
+print(single_level_factors)
+
+# If you want to remove these variables from the modeling process:
+attrition_data <- attrition_data[, !names(attrition_data) %in% single_level_factors]
+
+
+
