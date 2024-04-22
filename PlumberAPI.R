@@ -36,6 +36,8 @@ loaded_logistic_model <- readRDS("./models/saved_logistic_model.rds")
 #* @param YearsInCurrentRole Number of years the employee has been in the current role
 #* @param YearsSinceLastPromotion Number of years since the employee's last promotion
 #* @param YearsWithCurrManager Number of years the employee has been with the current manager
+#* @param EmployeeCount Count of employees
+#* @param EmployeeNumber Employee number
 #* @param Attrition Actual attrition status of the employee (Yes/No)
 
 #* @get /attrition_prediction
@@ -48,7 +50,7 @@ predict_attrition <- function(Age, BusinessTravel, DailyRate, Department, Distan
                               RelationshipSatisfaction, StandardHours, StockOptionLevel,
                               TotalWorkingYears, TrainingTimesLastYear, WorkLifeBalance,
                               YearsAtCompany, YearsInCurrentRole, YearsSinceLastPromotion,
-                              YearsWithCurrManager, Attrition) {
+                              YearsWithCurrManager, EmployeeCount, EmployeeNumber, Attrition) {
   
   # Create a data frame using the arguments
   to_be_predicted <- data.frame(
@@ -84,6 +86,8 @@ predict_attrition <- function(Age, BusinessTravel, DailyRate, Department, Distan
     YearsInCurrentRole = as.numeric(YearsInCurrentRole),
     YearsSinceLastPromotion = as.numeric(YearsSinceLastPromotion),
     YearsWithCurrManager = as.numeric(YearsWithCurrManager),
+    EmployeeCount = as.factor(EmployeeCount),
+    EmployeeNumber = as.factor(EmployeeNumber),
     Attrition = as.factor(Attrition)
   )
   
