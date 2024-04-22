@@ -82,12 +82,31 @@ print(boot_results)
 # Load required package for cross-validation
 library(caret)
 
+# Set seed for reproducibility
+set.seed(123)
+
+# Specify the size of the subset (e.g., 80% of the original data)
+subset_size <- 0.8 * nrow(attrition_data)
+
+# Randomly select rows for the subset
+subset_indices <- sample(1:nrow(attrition_data), subset_size, replace = FALSE)
+
+# Create the subset
+subset_data <- attrition_data[subset_indices, ]
+
+# Display the dimensions of the subset
+cat("Subset dataset dimensions:", dim(subset_data), "\n")
+
 # Define the control parameters for cross-validation
 ctrl <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
 
-# Train the model using cross-validation
-model <- train(Attrition ~ ., data = attrition_data, method = "rf", trControl = ctrl)
+# Train the model using cross-validation on the subset dataset
+model <- train(Attrition ~ ., data = subset_data, method = "rf", trControl = ctrl)
 
 # Display the model results
 print(model)
+
+
+
+
 
