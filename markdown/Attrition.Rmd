@@ -650,3 +650,24 @@ rf_accuracy <- mean(rf_predictions == subset_data$Attrition)
 print(paste("Random Forest Accuracy:", rf_accuracy))
 ```
 
+```{r Performance Comparison}
+# Load required packages
+library(caret)
+
+# Define control parameters for cross-validation
+ctrl <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
+
+# Train logistic regression model
+logistic_model <- train(Attrition ~ ., data = subset_data, method = "glm", family = binomial, trControl = ctrl)
+# Train decision tree model
+tree_model <- train(Attrition ~ ., data = subset_data, method = "rpart", trControl = ctrl)
+# Train random forest model
+rf_model <- train(Attrition ~ ., data = subset_data, method = "rf", trControl = ctrl)
+
+# Compare model performances using resamples
+resamples_list <- resamples(list(LogisticRegression = logistic_model, DecisionTree = tree_model, RandomForest = rf_model))
+
+# Summarize model performances
+summary(resamples_list)
+```
+
