@@ -379,3 +379,29 @@ summary(promotion_anova)
 years_with_manager_anova <- aov(YearsWithCurrManager ~ Attrition, data = attrition_data)
 summary(years_with_manager_anova)
 
+# Basic Visualization
+#Uni variate Plots
+# Load required package for plotting
+library(ggplot2)
+
+# Histogram for Age
+ggplot(attrition_data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Age", x = "Age", y = "Frequency")
+
+# Histogram for MonthlyIncome
+ggplot(attrition_data, aes(x = MonthlyIncome)) +
+  geom_histogram(binwidth = 500, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Monthly Income", x = "Monthly Income", y = "Frequency")
+
+# Histogram for TotalWorkingYears
+ggplot(attrition_data, aes(x = TotalWorkingYears)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Total Working Years", x = "Total Working Years", y = "Frequency")
+
+# Histogram for YearsAtCompany
+ggplot(attrition_data, aes(x = YearsAtCompany)) +
+  geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Years at Company", x = "Years at Company", y = "Frequency")
+
+
