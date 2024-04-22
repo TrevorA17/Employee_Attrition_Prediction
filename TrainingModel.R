@@ -45,3 +45,20 @@ head(attrition_data)
 
 # Open the dataset in a viewer window
 View(attrition_data)
+
+# Load required package for data splitting
+library(caTools)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Split the data into training and testing sets (80% training, 20% testing)
+split <- sample.split(attrition_data$Attrition, SplitRatio = 0.8)
+
+# Create training and testing datasets
+training_data <- attrition_data[split, ]
+testing_data <- attrition_data[!split, ]
+
+# Display the dimensions of the training and testing datasets
+cat("Training dataset dimensions:", dim(training_data), "\n")
+cat("Testing dataset dimensions:", dim(testing_data), "\n")
