@@ -227,3 +227,84 @@ cat("Variable: YearsWithCurrManager\n")
 cat("Mean:", mean_years_with_curr_manager, "\n")
 cat("Median:", median_years_with_curr_manager, "\n")
 cat("Mode:", mode_years_with_curr_manager, "\n")
+
+# Measures of Distribution for numeric variables
+
+# Summary statistics for Age
+summary(attrition_data$Age)
+
+# Quartiles for Age
+quantile(attrition_data$Age)
+
+# Summary statistics for DailyRate
+summary(attrition_data$DailyRate)
+
+# Quartiles for DailyRate
+quantile(attrition_data$DailyRate)
+
+# Summary statistics for DistanceFromHome
+summary(attrition_data$DistanceFromHome)
+
+# Quartiles for DistanceFromHome
+quantile(attrition_data$DistanceFromHome)
+
+# Summary statistics for MonthlyIncome
+summary(attrition_data$MonthlyIncome)
+
+# Quartiles for MonthlyIncome
+quantile(attrition_data$MonthlyIncome)
+
+# Summary statistics for MonthlyRate
+summary(attrition_data$MonthlyRate)
+
+# Quartiles for MonthlyRate
+quantile(attrition_data$MonthlyRate)
+
+# Summary statistics for NumCompaniesWorked
+summary(attrition_data$NumCompaniesWorked)
+
+# Quartiles for NumCompaniesWorked
+quantile(attrition_data$NumCompaniesWorked)
+
+# Summary statistics for PercentSalaryHike
+summary(attrition_data$PercentSalaryHike)
+
+# Quartiles for PercentSalaryHike
+quantile(attrition_data$PercentSalaryHike)
+
+# Summary statistics for TotalWorkingYears
+summary(attrition_data$TotalWorkingYears)
+
+# Quartiles for TotalWorkingYears
+quantile(attrition_data$TotalWorkingYears)
+
+# Summary statistics for TrainingTimesLastYear
+summary(attrition_data$TrainingTimesLastYear)
+
+# Quartiles for TrainingTimesLastYear
+quantile(attrition_data$TrainingTimesLastYear)
+
+# Summary statistics for YearsAtCompany
+summary(attrition_data$YearsAtCompany)
+
+# Quartiles for YearsAtCompany
+quantile(attrition_data$YearsAtCompany)
+
+# Summary statistics for YearsInCurrentRole
+summary(attrition_data$YearsInCurrentRole)
+
+# Quartiles for YearsInCurrentRole
+quantile(attrition_data$YearsInCurrentRole)
+
+# Summary statistics for YearsSinceLastPromotion
+summary(attrition_data$YearsSinceLastPromotion)
+
+# Quartiles for YearsSinceLastPromotion
+quantile(attrition_data$YearsSinceLastPromotion)
+
+# Summary statistics for YearsWithCurrManager
+summary(attrition_data$YearsWithCurrManager)
+
+# Quartiles for YearsWithCurrManager
+quantile(attrition_data$YearsWithCurrManager)
+
