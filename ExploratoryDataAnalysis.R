@@ -424,4 +424,31 @@ ggplot(attrition_data, aes(x = "", y = YearsAtCompany)) +
   geom_boxplot(fill = "skyblue", color = "black") +
   labs(title = "Boxplot of Years at Company", x = NULL, y = "Years at Company")
 
+# Pairwise scatterplots for selected numeric variables
+ggplot(attrition_data, aes(x = Age, y = MonthlyIncome, color = Attrition)) +
+  geom_point() +
+  labs(title = "Scatterplot of Age vs. Monthly Income", x = "Age", y = "Monthly Income")
 
+ggplot(attrition_data, aes(x = YearsAtCompany, y = YearsSinceLastPromotion, color = Attrition)) +
+  geom_point() +
+  labs(title = "Scatterplot of Years at Company vs. Years Since Last Promotion", x = "Years at Company", y = "Years Since Last Promotion")
+
+# Boxplots for numeric variables grouped by Attrition
+ggplot(attrition_data, aes(x = Attrition, y = Age, fill = Attrition)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Age by Attrition", x = "Attrition", y = "Age")
+
+ggplot(attrition_data, aes(x = Attrition, y = MonthlyIncome, fill = Attrition)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Monthly Income by Attrition", x = "Attrition", y = "Monthly Income")
+
+# Faceted histograms for Age and MonthlyIncome by Attrition
+ggplot(attrition_data, aes(x = Age)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Age by Attrition", x = "Age", y = "Frequency") +
+  facet_wrap(~Attrition)
+
+ggplot(attrition_data, aes(x = MonthlyIncome)) +
+  geom_histogram(binwidth = 500, fill = "skyblue", color = "black") +
+  labs(title = "Distribution of Monthly Income by Attrition", x = "Monthly Income", y = "Frequency") +
+  facet_wrap(~Attrition)
