@@ -1375,3 +1375,96 @@ ggplot(attrition_data, aes(x = MonthlyIncome)) +
 ```
 
 ![](Attrition_files/figure-gfm/Basic%20Visualization-14.png)<!-- -->
+
+``` r
+# Check for missing values in the dataset
+missing_values <- colSums(is.na(attrition_data))
+
+# Check if there are any missing values in any column
+any_missing <- any(missing_values > 0)
+
+# Print the results
+if (any_missing) {
+  print("There are missing values in the dataset.")
+  # Display the number of missing values in each column
+  print(missing_values[missing_values > 0])
+} else {
+  print("There are no missing values in the dataset.")
+}
+```
+
+    ## [1] "There are no missing values in the dataset."
+
+``` r
+# Load required package for data transformation
+library(caret)
+```
+
+    ## Loading required package: lattice
+
+``` r
+# Function to normalize numeric variables
+normalize_data <- function(data) {
+  normalized_data <- as.data.frame(apply(data, 2, function(x) (x - min(x)) / (max(x) - min(x))))
+  return(normalized_data)
+}
+
+# Apply normalization to numeric variables
+normalized_attrition_data <- normalize_data(attrition_data[, c("Age", "DailyRate", "DistanceFromHome", "MonthlyIncome", "MonthlyRate", "NumCompaniesWorked", "PercentSalaryHike", "TotalWorkingYears", "TrainingTimesLastYear", "YearsAtCompany", "YearsInCurrentRole", "YearsSinceLastPromotion", "YearsWithCurrManager")])
+
+# Display the first few rows of the normalized dataset
+head(normalized_attrition_data)
+```
+
+    ##         Age DailyRate DistanceFromHome MonthlyIncome MonthlyRate
+    ## 1 0.5476190 0.7158196       0.00000000     0.2624539  0.69805260
+    ## 2 0.7380952 0.1267001       0.25000000     0.2170090  0.91600080
+    ## 3 0.4523810 0.9098067       0.03571429     0.0569247  0.01212608
+    ## 4 0.3571429 0.9234073       0.07142857     0.1000527  0.84581409
+    ## 5 0.2142857 0.3500358       0.03571429     0.1294892  0.58373821
+    ## 6 0.3333333 0.6463851       0.03571429     0.1084255  0.39229070
+    ##   NumCompaniesWorked PercentSalaryHike TotalWorkingYears TrainingTimesLastYear
+    ## 1          0.8888889        0.00000000             0.200             0.0000000
+    ## 2          0.1111111        0.85714286             0.250             0.5000000
+    ## 3          0.6666667        0.28571429             0.175             0.5000000
+    ## 4          0.1111111        0.00000000             0.200             0.5000000
+    ## 5          1.0000000        0.07142857             0.150             0.5000000
+    ## 6          0.0000000        0.14285714             0.200             0.3333333
+    ##   YearsAtCompany YearsInCurrentRole YearsSinceLastPromotion
+    ## 1          0.150          0.2222222              0.00000000
+    ## 2          0.250          0.3888889              0.06666667
+    ## 3          0.000          0.0000000              0.00000000
+    ## 4          0.200          0.3888889              0.20000000
+    ## 5          0.050          0.1111111              0.13333333
+    ## 6          0.175          0.3888889              0.20000000
+    ##   YearsWithCurrManager
+    ## 1            0.2941176
+    ## 2            0.4117647
+    ## 3            0.0000000
+    ## 4            0.0000000
+    ## 5            0.1176471
+    ## 6            0.3529412
+
+``` r
+# Check the number of levels for each factor variable
+factor_levels <- sapply(attrition_data, function(x) {
+  if (is.factor(x)) {
+    return(length(levels(x)))
+  } else {
+    return(0)  # For non-factor variables
+  }
+})
+
+# Identify factor variables with only one level
+single_level_factors <- names(factor_levels[factor_levels == 1])
+
+# Print the names of factor variables with only one level
+print(single_level_factors)
+```
+
+    ## [1] "Over18"
+
+``` r
+# If you want to remove these variables from the modeling process:
+attrition_data <- attrition_data[, !names(attrition_data) %in% single_level_factors]
+```
