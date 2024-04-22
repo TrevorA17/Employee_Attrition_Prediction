@@ -404,4 +404,24 @@ ggplot(attrition_data, aes(x = YearsAtCompany)) +
   geom_histogram(binwidth = 1, fill = "skyblue", color = "black") +
   labs(title = "Distribution of Years at Company", x = "Years at Company", y = "Frequency")
 
+# Boxplot for Age
+ggplot(attrition_data, aes(x = "", y = Age)) +
+  geom_boxplot(fill = "skyblue", color = "black") +
+  labs(title = "Boxplot of Age", x = NULL, y = "Age")
+
+# Boxplot for MonthlyIncome
+ggplot(attrition_data, aes(x = "", y = MonthlyIncome)) +
+  geom_boxplot(fill = "skyblue", color = "black") +
+  labs(title = "Boxplot of Monthly Income", x = NULL, y = "Monthly Income")
+
+# Boxplot for TotalWorkingYears
+ggplot(attrition_data, aes(x = "", y = TotalWorkingYears)) +
+  geom_boxplot(fill = "skyblue", color = "black") +
+  labs(title = "Boxplot of Total Working Years", x = NULL, y = "Total Working Years")
+
+# Boxplot for YearsAtCompany
+ggplot(attrition_data, aes(x = "", y = YearsAtCompany)) +
+  geom_boxplot(fill = "skyblue", color = "black") +
+  labs(title = "Boxplot of Years at Company", x = NULL, y = "Years at Company")
+
 
