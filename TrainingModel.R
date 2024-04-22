@@ -62,3 +62,19 @@ testing_data <- attrition_data[!split, ]
 # Display the dimensions of the training and testing datasets
 cat("Training dataset dimensions:", dim(training_data), "\n")
 cat("Testing dataset dimensions:", dim(testing_data), "\n")
+
+# Load required package for bootstrapping
+library(boot)
+
+# Function to compute the statistic of interest (e.g., mean, median) from a bootstrap sample
+compute_statistic <- function(data, indices) {
+  statistic <- mean(data$Age[indices])  # Example: Compute the mean of 'Age'
+  return(statistic)
+}
+
+# Perform bootstrapping
+boot_results <- boot(data = attrition_data, statistic = compute_statistic, R = 1000)
+
+# Display the bootstrapped results
+print(boot_results)
+
