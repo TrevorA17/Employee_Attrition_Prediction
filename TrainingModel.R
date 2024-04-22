@@ -106,6 +106,48 @@ model <- train(Attrition ~ ., data = subset_data, method = "rf", trControl = ctr
 # Display the model results
 print(model)
 
+# Make predictions using the logistic regression model
+logistic_predictions <- predict(logistic_model, type = "response")
+
+# Convert predicted probabilities to binary predictions
+logistic_predictions_binary <- ifelse(logistic_predictions > 0.5, "Yes", "No")
+
+# Calculate accuracy
+logistic_accuracy <- mean(logistic_predictions_binary == subset_data$Attrition)
+print(paste("Logistic Regression Accuracy:", logistic_accuracy))
+
+# Make predictions using the decision tree model
+tree_predictions <- predict(tree_model, subset_data, type = "class")
+
+# Calculate accuracy
+tree_accuracy <- mean(tree_predictions == subset_data$Attrition)
+print(paste("Decision Tree Accuracy:", tree_accuracy))
+
+# Make predictions using the random forest model
+rf_predictions <- predict(rf_model, subset_data)
+
+# Calculate accuracy
+rf_accuracy <- mean(rf_predictions == subset_data$Attrition)
+print(paste("Random Forest Accuracy:", rf_accuracy))
+
+# Load required packages
+library(caret)
+
+# Define control parameters for cross-validation
+ctrl <- trainControl(method = "cv", number = 10)  # 10-fold cross-validation
+
+# Train logistic regression model
+logistic_model <- train(Attrition ~ ., data = subset_data, method = "glm", family = binomial, trControl = ctrl)
+# Train decision tree model
+tree_model <- train(Attrition ~ ., data = subset_data, method = "rpart", trControl = ctrl)
+# Train random forest model
+rf_model <- train(Attrition ~ ., data = subset_data, method = "rf", trControl = ctrl)
+
+# Compare model performances using resamples
+resamples_list <- resamples(list(LogisticRegression = logistic_model, DecisionTree = tree_model, RandomForest = rf_model))
+
+# Summarize model performances
+summary(resamples_list)
 
 
 
