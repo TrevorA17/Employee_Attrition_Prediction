@@ -349,3 +349,33 @@ table(attrition_data$Attrition, attrition_data$StockOptionLevel)
 # Contingency table for Attrition and WorkLifeBalance
 table(attrition_data$Attrition, attrition_data$WorkLifeBalance)
 
+# ANOVA
+# Load required package for ANOVA
+library(stats)
+
+# Perform ANOVA tests
+
+# ANOVA for Age and Attrition
+age_anova <- aov(Age ~ Attrition, data = attrition_data)
+summary(age_anova)
+
+# ANOVA for MonthlyIncome and Attrition
+income_anova <- aov(MonthlyIncome ~ Attrition, data = attrition_data)
+summary(income_anova)
+
+# ANOVA for TotalWorkingYears and Attrition
+working_years_anova <- aov(TotalWorkingYears ~ Attrition, data = attrition_data)
+summary(working_years_anova)
+
+# ANOVA for YearsAtCompany and Attrition
+years_at_company_anova <- aov(YearsAtCompany ~ Attrition, data = attrition_data)
+summary(years_at_company_anova)
+
+# ANOVA for YearsSinceLastPromotion and Attrition
+promotion_anova <- aov(YearsSinceLastPromotion ~ Attrition, data = attrition_data)
+summary(promotion_anova)
+
+# ANOVA for YearsWithCurrManager and Attrition
+years_with_manager_anova <- aov(YearsWithCurrManager ~ Attrition, data = attrition_data)
+summary(years_with_manager_anova)
+
